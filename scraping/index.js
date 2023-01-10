@@ -8,27 +8,33 @@ async function scrape (url) {
   return cheerio.load(html)
 }
 async function getLeaderBoard () {
+  let leaderboard = []
   const $ = await scrape(URLS.leaderboard)
   const $rows = $('table tbody tr')
   const LEADERBOARD_SELECTORS = {
-    team: '.fs-table-text_3',
-    victories: '.fs-table-text_4',
-    loses: '.fs-table-text_5',
-    goalsScored: '.fs-table-text_6',
-    goalsAgainst: '.fs-table-text_7',
-    yellowCards: '.fs-table-text_8',
-    redCards: '.fs-table-text_9'
+    team: { selector: '.fs-table-text_3', typeOf: 'string' },
+    wins: { selector: '.fs-table-text_4', typeOf: 'number' },
+    loses: { selector: '.fs-table-text_5', typeOf: 'number' },
+    goalsScored: { selector: '.fs-table-text_6', typeOf: 'number' },
+    goalsAgainst: { selector: '.fs-table-text_7', typeOf: 'number' },
+    yellowCards: { selector: '.fs-table-text_8', typeOf: 'number' },
+    redCards: { selector: '.fs-table-text_9', typeOf: 'number' }
   }
-  const cleanText = text => text.replace(/\t|\n|\s:/g, '').replace(/.*:/g, ' ')
+  const cleanText = text => text.replace(/\t|\n|\s:/g, '').replace(/.*:/g, ' ').trim()
   const leaderboardSelectorEntries = Object.entries(LEADERBOARD_SELECTORS)
   // $rows => each - elemnto de "cheerio" forEach != elemento.cheerio
-  $rows.each((i, elemento) => {
-    const leaderBoardEntries = leaderboardSelectorEntries.map(([key, selector]) => {
+  $rows.each((_, elemento) => {
+    const leaderBoardEntries = leaderboardSelectorEntries.map(([key, { selector, typeOf }]) => {
       const rawValue = $(elemento).find(selector).text()
-      const value = cleanText(rawValue)
+      const cleanValue = cleanText(rawValue)
+      // const value = Number.isNaN(Number(cleanValue)) ? cleanValue : Number(cleanValue)
+      // const value = key === 'team' ? cleanValue : Number(cleanValue)
+      const value = typeOf === 'number' ? Number(cleanValue) : cleanValue
       return [key, value]
     })
-    console.log(Object.fromEntries(leaderBoardEntries))
+    leaderboard.push(Object.fromEntries(leaderBoardEntries))
   })
+  return leaderboard
 }
-getLeaderBoard()
+const leaderborad = await getLeaderBoard()
+console.log(leaderborad)
