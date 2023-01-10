@@ -1,4 +1,4 @@
-import TEAMS from '../db/teams.json'
+import TEAMS from '../db/teams.json' assert { type: 'json' }
 import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import * as cheerio from 'cheerio'
