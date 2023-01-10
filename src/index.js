@@ -7,9 +7,9 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
-
+import leadeboard from '../db/leaderboard.json'
 export default {
-	async fetch(request, env, ctx) {
-		return new Response("Hello World!");
-	},
-};
+  async fetch (request, env, ctx) {
+    return new Response(JSON.stringify(leadeboard))
+  }
+}
