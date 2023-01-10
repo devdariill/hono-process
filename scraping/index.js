@@ -7,28 +7,28 @@ async function scrape (url) {
   const html = await res.text()
   return cheerio.load(html)
 }
-const cleanText = (text) => text.replace(/\t|\n|\s:/g, '').replace(/.*:/g, ' ')
 async function getLeaderBoard () {
   const $ = await scrape(URLS.leaderboard)
   const $rows = $('table tbody tr')
-  $rows.each((i, el) => {
-    const $el = $(el)
-    const rawTeam = $el.find('.fs-table-text_3').text()
-    const rawVictories = $el.find('.fs-table-text_4').text()
-    const rawDefeats = $el.find('.fs-table-text_5').text()
-    const rawGoalsScored = $el.find('.fs-table-text_6').text()
-    const rawGoalsAgainst = $el.find('.fs-table-text_7').text()
-    const rawYellowCards = $el.find('.fs-table-text_8').text()
-    const rawRedCards = $el.find('.fs-table-text_9').text()
-    console.log(
-      cleanText(rawTeam),
-      cleanText(rawVictories),
-      cleanText(rawDefeats),
-      cleanText(rawGoalsScored),
-      cleanText(rawGoalsAgainst),
-      cleanText(rawYellowCards),
-      cleanText(rawRedCards)
-    )
+  const LEADERBOARD_SELECTORS = {
+    team: '.fs-table-text_3',
+    victories: '.fs-table-text_4',
+    loses: '.fs-table-text_5',
+    goalsScored: '.fs-table-text_6',
+    goalsAgainst: '.fs-table-text_7',
+    yellowCards: '.fs-table-text_8',
+    redCards: '.fs-table-text_9'
+  }
+  const cleanText = text => text.replace(/\t|\n|\s:/g, '').replace(/.*:/g, ' ')
+  const leaderboardSelectorEntries = Object.entries(LEADERBOARD_SELECTORS)
+  // $rows => each - elemnto de "cheerio" forEach != elemento.cheerio
+  $rows.each((i, elemento) => {
+    const leaderBoardEntries = leaderboardSelectorEntries.map(([key, selector]) => {
+      const rawValue = $(elemento).find(selector).text()
+      const value = cleanText(rawValue)
+      return [key, value]
+    })
+    console.log(Object.fromEntries(leaderBoardEntries))
   })
 }
 getLeaderBoard()
