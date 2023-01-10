@@ -3,12 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   cheerio: 1.0.0-rc.12
   hono: 2.7.2
-  standard: ^17.0.0
+  picocolors: 1.0.0
+  standard: 17.0.0
   wrangler: 2.6.2
 
 dependencies:
   cheerio: 1.0.0-rc.12
   hono: 2.7.2
+  picocolors: 1.0.0
 
 devDependencies:
   standard: 17.0.0
@@ -2037,6 +2039,10 @@ packages:
   /path-to-regexp/6.2.1:
     resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
     dev: true
+
+  /picocolors/1.0.0:
+    resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+    dev: false
 
   /picomatch/2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
