@@ -3,7 +3,7 @@ import { writeFile, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import * as cheerio from 'cheerio'
 const DB_PATH = path.join(process.cwd(), './db/')
-const TEAMS = await readFile(`${DB_PATH}/teams.json`, 'utf-8')
+const TEAMS = await readFile(`${DB_PATH}/teams.json`, 'utf-8').then(JSON.parse)
 const URLS = {
   leaderboard: 'https://kingsleague.pro/estadisticas/clasificacion/'
 }
@@ -40,10 +40,9 @@ async function getLeaderBoard () {
     })
     const { team: teamName, ...leaderboardForTeam } = Object.fromEntries(leaderBoardEntries)
     const team = getTeamFrom({ name: teamName })
-    leaderboard.push(Object.fromEntries(leaderboardForTeam, team))
+    leaderboard.push({ ...leaderboardForTeam, team })
   })
   return leaderboard
 }
 const leaderborad = await getLeaderBoard()
-console.log(leaderborad)
 await writeFile(`${DB_PATH}/leaderboard.json`, JSON.stringify(leaderborad, null, 2), 'utf-8')
