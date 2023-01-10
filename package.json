@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev:api": "wrangler dev src/index.js ",
-    "publish:api": "wrangler publish src/index.js"
+    "dev:api": "wrangler dev api/index.js ",
+    "publish:api": "wrangler publish api/index.js"
   },
   "keywords": [],
   "author": "",
