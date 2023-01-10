@@ -2,11 +2,13 @@ lockfileVersion: 5.4
 
 specifiers:
   cheerio: 1.0.0-rc.12
+  hono: 2.7.2
   standard: ^17.0.0
   wrangler: 2.6.2
 
 dependencies:
   cheerio: 1.0.0-rc.12
+  hono: 2.7.2
 
 devDependencies:
   standard: 17.0.0
@@ -1419,6 +1421,11 @@ packages:
     dependencies:
       function-bind: 1.1.1
     dev: true
+
+  /hono/2.7.2:
+    resolution: {integrity: sha512-FruLXaRkdEetZwKvK3XC3Kk6JrjTLJxvjg6StUwErSPF2jKiani+YZSJ3tbqisx/fX/E0nsrR9MIUZ0CxL+pIg==}
+    engines: {node: '>=16.0.0'}
+    dev: false
 
   /html-rewriter-wasm/0.4.1:
     resolution: {integrity: sha512-lNovG8CMCCmcVB1Q7xggMSf7tqPCijZXaH4gL6iE8BFghdQCbaY5Met9i1x2Ex8m/cZHDUtXK9H6/znKamRP8Q==}
