@@ -10,6 +10,10 @@
 import leadeboard from '../db/leaderboard.json'
 export default {
   async fetch (request, env, ctx) {
-    return new Response(JSON.stringify(leadeboard))
+    return new Response(JSON.stringify(leadeboard), {
+      headers: {
+        'content-type': 'application/json;charset=UTF-8'
+      }
+    })
   }
 }
