@@ -3,4 +3,6 @@ https://www.twitch.tv/videos/1696559999
 pnpm init
 pnpm install cheerio -E
 
+extension : YAML for gh actions
+
 
