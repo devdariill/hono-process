@@ -1,3 +1,4 @@
+import TEAMS from '../db/teams.json'
 import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import * as cheerio from 'cheerio'
@@ -22,6 +23,7 @@ async function getLeaderBoard () {
     yellowCards: { selector: '.fs-table-text_8', typeOf: 'number' },
     redCards: { selector: '.fs-table-text_9', typeOf: 'number' }
   }
+  const getTeamFrom = ({name})=> TEAMS.find(team => team.name === name)
   const cleanText = text => text.replace(/\t|\n|\s:/g, '').replace(/.*:/g, ' ').trim()
   const leaderboardSelectorEntries = Object.entries(LEADERBOARD_SELECTORS)
   // $rows => each - elemnto de "cheerio" forEach != elemento.cheerio
@@ -34,7 +36,9 @@ async function getLeaderBoard () {
       const value = typeOf === 'number' ? Number(cleanValue) : cleanValue
       return [key, value]
     })
-    leaderboard.push(Object.fromEntries(leaderBoardEntries))
+    const { team: teamName, ...leaderboardForTeam } = Object.fromEntries(leaderBoardEntries)
+    const team = getTeamFrom({ name: teamName })
+    leaderboard.push(Object.fromEntries(leaderboardForTeam, team))
   })
   return leaderboard
 }
