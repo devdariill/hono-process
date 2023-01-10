@@ -58,5 +58,17 @@
     "name": "TheGrefg",
     "image": "thegrefg.png",
     "teamId": 0
+  },
+  {
+    "id": "djmariio",
+    "name": "DjMaRiiO",
+    "image": "djmariio.png",
+    "teamId": 0
+  },
+  {
+    "id": "hnos-buyer",
+    "name": "Hnos. Buyer",
+    "image": "hnos-buyer.png",
+    "teamId": 0
   }
 ]
