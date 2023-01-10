@@ -38,7 +38,7 @@ jobs:
           version: 7.23.0
           run_install: true
       - run: |
-          node scraping/leaderboard.js
+          node --trace-warnings scraping/leaderboard.js
           git config user.name kings-league-bot
           git config user.email devdariill@gmail.com
           git add -A
