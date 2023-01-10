@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:api": "wrangler dev src/index.js ",
+    "publish:api": "wrangler publish src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,7 @@
     "hono": "2.7.2"
   },
   "devDependencies": {
-    "standard": "^17.0.0",
+    "standard": "17.0.0",
     "wrangler": "2.6.2"
   },
   "eslintConfig": {
