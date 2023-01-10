@@ -1,0 +1,46 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Scrape Kings League Infojobs Website
+#cada     # que se crea una pull
+#on:
+  #release:
+    #types: [created]
+    
+#  cada x tiempo
+#on:
+#  schedule:
+#    - cron: "0 */1 * * 0"
+
+#  si hace peticio a x url se genera el actions
+#on:
+#  reposiitory_dispatch
+#    types:
+#      -webhook
+on:
+  #boton para el actions
+  workflow_dispatch:
+    
+  schedule:
+  - cron: "30 20 * * 0"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - uses: pnpm/action-setup@2
+        with:
+          version: 7.23.0
+      - run: |
+          node scraping/leaderboard.js
+          git config user.name kings-league-bot
+          git config user.email devdariill@gmail.com
+          git add -A
+          git commit -m "[bot] Update KingsLeague Database"
+          git push origin main
