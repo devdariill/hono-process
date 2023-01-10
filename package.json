@@ -14,7 +14,8 @@
     "cheerio": "1.0.0-rc.12"
   },
   "devDependencies": {
-    "standard": "^17.0.0"
+    "standard": "^17.0.0",
+    "wrangler": "2.6.2"
   },
   "eslintConfig": {
     "extends": "standard"
