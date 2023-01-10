@@ -1,3 +1,4 @@
+import { serveStatic } from 'hono/serve-static.module'
 import { Hono } from 'hono'
 import leadeboard from '../db/leaderboard.json'
 // export default {
@@ -29,5 +30,7 @@ app.get('/leaderboard', (ctx) => {
     leadeboard
   ])
 })
+
+app.get('/static/*', serveStatic({ root: './' }))
 
 export default app
