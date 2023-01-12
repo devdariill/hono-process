@@ -1,3 +1,4 @@
+import { cors } from 'hono/cors'
 import { serveStatic } from 'hono/serve-static.module'
 import { Hono } from 'hono'
 import leadeboard from '../db/leaderboard.json'
@@ -13,6 +14,7 @@ import presidents from '../db/presidents.json'
 //   }
 // }
 const app = new Hono()
+app.use(cors({ origin: '*' }))
 
 app.get('/', (ctx) => {
   return ctx.json([
